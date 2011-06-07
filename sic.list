@@ -1,0 +1,46 @@
+LOC 	LABEL     OPERATOR  OPERAND   	OBJECT CODE
+0000	COPY      START     1000     
+0000	FIRST     STL       RETADR   	140000
+0003	CLOOP     JSUB      RDREC    	480000
+0006	          LDA       LENGTH   	000000
+0009	          COMP      ZERO     	280000
+000c	          JEQ       ENDFIL   	300000
+000f	          JSUB      WRREC    	480000
+0012	          J         CLOOP    	3c0000
+0015	ENDFIL    LDA       EOF      	000000
+0018	          STA       BUFFER   	0c0000
+001b	          LDA       THREE    	000000
+001e	          STA       LENGTH   	0c0000
+0021	          JSUB      WRREC    	480000
+0024	          LDL       RETADR   	080000
+0027	          RSUB               	4c0000
+002a	EOF       BYTE      C'EOF'   	4f4627
+002d	THREE     WORD      3        	fffffffb
+0030	ZERO      WORD      0        	ffffffdd
+0033	RETADR    RESW      1        
+ffe8	LENGTH    RESW      1        
+ff9d	BUFFER    RESB      4096     
+9f7a	RDREC     LDX       ZERO     	040000
+9f7d	          LDA       ZERO     	000000
+9f80	RLOOP     TD        INPUT    	e00000
+9f83	          JEQ       RLOOP    	300000
+9f86	          RD        INPUT    	d80000
+9f89	          COMP      ZERO     	280000
+9f8c	          JEQ       EXIT     	300000
+9f8f	          STCH      BUFFER,X 	540000
+9f92	          TIX       MAXLEN   	2c0000
+9f95	          JLT       RLOOP    	380000
+9f98	EXIT      STX       LENGTH   	100000
+9f9b	          RSUB               	4c0000
+9f9e	INPUT     BYTE      X'F1'    	0000f1
+9f9f	MAXLEN    WORD      4096     	009fdd
+9fa2	WRREC     LDX       ZERO     	040000
+9fa5	WLOOP     TD        OUTPUT   	e00000
+9fa8	          JEQ       WLOOP    	300000
+9fab	          LDCH      BUFFER,X 	500000
+9fae	          WD        OUTPUT   	dc0000
+9fb1	          TIX       LENGTH   	2c0000
+9fb4	          JLT       WLOOP    	380000
+9fb7	          RSUB               	4c0000
+9fba	OUTPUT    BYTE      X'05'    	000005
+9fbb	          END       FIRST    

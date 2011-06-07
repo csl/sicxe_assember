@@ -67,7 +67,7 @@ static SIC_OPTAB OPTAB[]=
     {   "MUL",  '3',  0x20},
     {    "OR",  '3',  0x44},
     {    "RD",  '3',  0xD8},
-    {  "RSUB",  '3',  0x4C},
+    {  "RSUB\r",  '3',  0x4C},
     {   "STA",  '3',  0x0C},
     {  "STCH",  '3',  0x54},
     {   "STL",  '3',  0x14},

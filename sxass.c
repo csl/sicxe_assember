@@ -59,7 +59,9 @@ int SearchOptab(char * Mnemonic)
 
 	int i=0;
 
-	printf("foundint: %s, %d\n", Mnemonic, strlen(Mnemonic));
+	printf("foundint: %s\n%d\n", Mnemonic, strlen(Mnemonic));
+	
+	printf("foundint: %ca\n", Mnemonic[strlen(Mnemonic)-1]);
 
 	for(i=0;i<size;i++){
 		if(!strcmp(Mnemonic, OPTAB[i].Mnemonic))
